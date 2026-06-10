@@ -16,9 +16,18 @@
     <div class="compiler-box">
         <h1 class="title">LaTeX to DOCX Compiler</h1>
         
+        <div class="tabs">
+            <button class="tab-btn active" id="tab-file">Upload File</button>
+            <button class="tab-btn" id="tab-code">Paste Code</button>
+        </div>
+
         <div class="upload-area" id="drop-zone">
             <input type="file" id="file-input" accept=".tex" hidden>
             <span id="upload-prompt">Select .tex file</span>
+        </div>
+
+        <div class="code-area-container" id="code-area-container" hidden>
+            <textarea id="latex-code" placeholder="PASTE YOUR LATEX CODE HERE..."></textarea>
         </div>
 
         <button class="btn" id="compile-btn" disabled>Compile</button>

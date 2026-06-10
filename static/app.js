@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const tabFile = document.getElementById("tab-file");
+    const tabCode = document.getElementById("tab-code");
     const dropZone = document.getElementById("drop-zone");
     const fileInput = document.getElementById("file-input");
     const uploadPrompt = document.getElementById("upload-prompt");
+    const codeAreaContainer = document.getElementById("code-area-container");
+    const latexCode = document.getElementById("latex-code");
     const compileBtn = document.getElementById("compile-btn");
     const statusContainer = document.getElementById("status-container");
     const logSection = document.getElementById("log-section");
@@ -9,6 +13,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadBtn = document.getElementById("download-btn");
 
     let currentFile = null;
+    let activeTab = "file"; // "file" or "code"
+
+    // Tab Navigation Handlers
+    tabFile.addEventListener("click", () => {
+        if (activeTab === "file") return;
+        activeTab = "file";
+        tabFile.classList.add("active");
+        tabCode.classList.remove("active");
+        dropZone.hidden = false;
+        codeAreaContainer.hidden = true;
+        updateCompileButtonState();
+    });
+
+    tabCode.addEventListener("click", () => {
+        if (activeTab === "code") return;
+        activeTab = "code";
+        tabCode.classList.add("active");
+        tabFile.classList.remove("active");
+        dropZone.hidden = true;
+        codeAreaContainer.hidden = false;
+        updateCompileButtonState();
+    });
+
+    // Helper to toggle Compile Button disabled state
+    function updateCompileButtonState() {
+        if (activeTab === "file") {
+            compileBtn.disabled = !currentFile;
+        } else {
+            compileBtn.disabled = !latexCode.value.trim();
+        }
+    }
+
+    latexCode.addEventListener("input", () => {
+        updateCompileButtonState();
+    });
 
     dropZone.addEventListener("click", () => {
         fileInput.click();
@@ -49,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         currentFile = file;
         uploadPrompt.textContent = file.name;
-        compileBtn.disabled = false;
+        updateCompileButtonState();
         hideStatus();
         logSection.hidden = true;
         downloadBtn.hidden = true;
@@ -59,11 +98,26 @@ document.addEventListener("DOMContentLoaded", () => {
         currentFile = null;
         fileInput.value = "";
         uploadPrompt.textContent = "Select .tex file";
-        compileBtn.disabled = true;
+        updateCompileButtonState();
     }
 
     compileBtn.addEventListener("click", async () => {
-        if (!currentFile) return;
+        let fileToUpload = null;
+        let filenameForLogs = "";
+
+        if (activeTab === "file") {
+            if (!currentFile) return;
+            fileToUpload = currentFile;
+            filenameForLogs = currentFile.name.toUpperCase();
+        } else {
+            const codeText = latexCode.value.trim();
+            if (!codeText) return;
+            
+            // Convert pasted text into a virtual file
+            const blob = new Blob([codeText], { type: "application/x-latex" });
+            fileToUpload = new File([blob], "pasted.tex", { type: "application/x-latex" });
+            filenameForLogs = "PASTED LATEX CODE";
+        }
 
         compileBtn.disabled = true;
         downloadBtn.hidden = true;
@@ -72,10 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
         showStatus("Status: Compiling...");
 
         appendLogLine("Initializing compiler subprocess...", "system-msg");
-        appendLogLine(`Processing ${currentFile.name.toUpperCase()}...`, "system-msg");
+        appendLogLine(`Processing ${filenameForLogs}...`, "system-msg");
 
         const formData = new FormData();
-        formData.append("file", currentFile);
+        formData.append("file", fileToUpload);
 
         try {
             const response = await fetch("/convert", {
