@@ -403,8 +403,27 @@ def resolve_citations(text: str, citation_map: Dict[str, int]) -> str:
 def clean_latex_text(text: str, label_map: Dict[str, Any], citation_map: Dict[str, int]) -> str:
     """Translates LaTeX markup structures to Tagged text format and unescapes symbols."""
     try:
-        # Strip comments
+        # Normalize newlines
+        text = text.replace('\r\n', '\n')
+        
+        # Strip comments (preserving the newline so that it doesn't merge unrelated lines)
         text = re.sub(r'%.*?\n', '\n', text)
+        
+        # Replace single newlines with spaces, preserving forced line breaks \\
+        lines = text.split('\n')
+        cleaned_lines = []
+        for line in lines:
+            line_str = line.strip()
+            if not line_str:
+                continue
+            if line_str.endswith(r'\\') or line_str.endswith(r'\newline'):
+                cleaned_lines.append(line_str)
+            else:
+                cleaned_lines.append(line_str + ' ')
+        text = "".join(cleaned_lines).strip()
+        
+        # Collapse multiple spaces
+        text = re.sub(r'[ \t]+', ' ', text)
         
         # Convert inline math $...$
         text = re.sub(r'\$([^$]+)\$', lambda m: latex_math_to_tagged_string(m.group(1)), text)
@@ -700,7 +719,8 @@ def add_table_block(doc: Any, table_num: str, title: str, alignments: List[Any],
             else:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT if c_idx == 0 else WD_ALIGN_PARAGRAPH.CENTER
                 
-            cleaned_text = clean_latex_text(cleaned_text := cell_text, label_map, citation_map)
+            cleaned_text = clean_latex_text(cell_text, label_map, citation_map)
+            cleaned_text = cleaned_text.replace('TEMP_CELL_BREAK', '\n')
             add_formatted_text(p, cleaned_text, font_size=8)
             
             is_header = (r_idx == 0)
@@ -837,7 +857,7 @@ def parse_tabular(tabular_text: str) -> Tuple[List[Any], List[List[str]]]:
             continue
         # Protect escaped ampersands \& from splitting
         clean_line = clean_line.replace(r'\&', 'TEMP_AMPERSAND')
-        cells = [c.replace('TEMP_CELL_BREAK', '\n').replace('TEMP_AMPERSAND', r'\&').strip() for c in clean_line.split('&')]
+        cells = [c.replace('TEMP_AMPERSAND', r'\&').strip() for c in clean_line.split('&')]
         rows.append(cells)
         
     return alignments, rows
@@ -1294,15 +1314,35 @@ def main() -> None:
                     pos = n_end
                 authors.append({"name": name, "affiliation": aff})
         else:
-            parts = author_raw.split(r'\and')
-            for part in parts:
-                part = part.strip()
-                if not part:
-                    continue
-                lines = [l.strip() for l in part.split(r'\\')]
-                name = lines[0]
-                aff = "\n".join(lines[1:])
-                authors.append({"name": name, "affiliation": aff})
+            # Check for tabular environment inside author_raw (common in IEEE conference papers)
+            tab_match = re.search(r'\\begin\{(tabular|tabularx|longtable)\}.*?\\end\{\1\}', author_raw, re.DOTALL)
+            if tab_match:
+                try:
+                    _, rows = parse_tabular(tab_match.group(0))
+                    if rows and len(rows) > 0:
+                        C = len(rows[0])
+                        for c in range(C):
+                            name = rows[0][c].strip()
+                            aff_parts = []
+                            for r in range(1, len(rows)):
+                                if c < len(rows[r]):
+                                    val = rows[r][c].replace('TEMP_CELL_BREAK', '\n').strip()
+                                    if val:
+                                        aff_parts.append(val)
+                            affiliation = "\n".join(aff_parts)
+                            authors.append({"name": name, "affiliation": affiliation})
+                except Exception as e:
+                    print(f"Warning: Failed to parse author tabular: {e}")
+            else:
+                parts = author_raw.split(r'\and')
+                for part in parts:
+                    part = part.strip()
+                    if not part:
+                        continue
+                    lines = [l.strip() for l in part.split(r'\\')]
+                    name = lines[0]
+                    aff = "\n".join(lines[1:])
+                    authors.append({"name": name, "affiliation": aff})
                 
     # Extract bibliography
     citations = []
