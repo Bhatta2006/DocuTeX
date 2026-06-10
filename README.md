@@ -1,5 +1,7 @@
 # DocuTeX
 
+**Live Site**: [docutex.vercel.app](https://docutex.vercel.app/)
+
 **DocuTeX** is a lightweight, pure Python LaTeX-to-DOCX converter with a minimal, high-performance web dashboard. Unlike traditional tools, DocuTeX does not require heavy external dependencies like Pandoc or MacTeX/MiKTeX to compile documents to Word. It parses LaTeX syntax directly and generates professionally formatted `.docx` files using native Python libraries.
 
 The application features a minimalist, monochrome brutalist web UI, allowing users to upload `.tex` files, view compilation logs in real-time, and download the finished `.docx` files instantly.
