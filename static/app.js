@@ -133,4 +133,26 @@ document.addEventListener("DOMContentLoaded", () => {
         terminalLogs.appendChild(line);
         terminalLogs.scrollTop = terminalLogs.scrollHeight;
     }
+
+    // GitHub Link & Auto-Star Interaction Handler
+    const githubLink = document.getElementById("github-link");
+    const toast = document.getElementById("toast");
+
+    githubLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        
+        // Display redirect & star reminder toast
+        toast.innerHTML = "Redirecting to GitHub...<br>Please press the <strong>STAR ⭐</strong> button on the top right to support the project!";
+        toast.hidden = false;
+
+        // Open repository in a new window after 1.8 seconds delay
+        setTimeout(() => {
+            window.open(githubLink.href, "_blank");
+            
+            // Fade out/hide toast after another few seconds
+            setTimeout(() => {
+                toast.hidden = true;
+            }, 3000);
+        }, 1800);
+    });
 });

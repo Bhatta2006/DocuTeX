@@ -133,3 +133,74 @@ body {
     color: #ffffff;
     text-decoration: underline;
 }
+
+/* GitHub Floating Button */
+.github-link {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 0.65rem;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    z-index: 100;
+}
+
+.github-link:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.github-icon {
+    display: block;
+}
+
+/* Toast / Redirect Modal */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    border: 1px solid #ffffff;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    z-index: 1000;
+    line-height: 1.4;
+    max-width: 320px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .github-link {
+        top: auto;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        right: auto;
+    }
+    
+    .toast {
+        left: 1rem;
+        right: 1rem;
+        bottom: 5rem;
+        max-width: none;
+    }
+}
