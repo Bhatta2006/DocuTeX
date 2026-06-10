@@ -29,12 +29,8 @@ DocuTeX/
 │   ├── index.html           # Minimalist HTML dashboard layout
 │   ├── style.css            # Monochrome brutalist stylesheet
 │   └── app.js               # Reactive upload and real-time logging script
-├── tests/                   # Test suite and test inputs
-│   ├── test_app.py          # FastAPI integration tests
-│   └── test_inputs/         # Sample LaTeX files for testing/example usage
-│       ├── test.tex
-│       ├── test1.tex
-│       └── test2.tex
+├── tests/                   # Test suite
+│   └── test_app.py          # FastAPI integration tests
 ├── app.py                   # FastAPI web server backend
 ├── generate_docx.py         # Direct LaTeX parsing and python-docx compiler
 ├── requirements.txt         # Python package dependencies
