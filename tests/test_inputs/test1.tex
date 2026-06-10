@@ -1,0 +1,164 @@
+%-------------------------
+% Resume in LaTeX — Ramakrishna V Bhat
+% Tailored for Auxia Software Internship
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Ramakrishna V Bhat} \\ \vspace{4pt}
+    \small
+    +91 9480106354 \quad
+    \href{mailto:ramkrsnabhat@gmail.com}{ramkrsnabhat@gmail.com} \quad
+    \href{https://github.com/bhatta2006}{github.com/bhatta2006} \quad
+    \href{https://linkedin.com/in/ramakrishnabhat333}{linkedin.com/in/ramakrishnabhat333}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {RV College of Engineering}{Bengaluru, India}
+      {Bachelor of Engineering -- Computer Science Engineering}{2024 -- Present (Expected July 2028)}
+      \resumeItemListStart
+        \resumeItem{Relevant Coursework: Data Structures \& Algorithms, Software Engineering, Machine Learning, AI Systems}
+        \resumeItem{LeetCode Rating: 1825 $|$ 450+ problems solved -- strong algorithmic and problem-solving foundation}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {AI/ML Research Intern}{November 2025 -- Present}
+      {Samsung R\&D Institute (Samsung PRISM)}{Bengaluru, India}
+      \resumeItemListStart
+        \resumeItem{Contributed to a \textbf{Federated Learning}-based Video Content Moment Retrieval system, spanning end-to-end model development, evaluation pipelines, and iterative performance benchmarking.}
+        \resumeItem{Analyzed AI model outputs to identify failure patterns, verified results against ground truth, and iterated based on structured reviewer feedback to improve model reliability.}
+        \resumeItem{Designed and refined prompts and model configurations to guide model outputs toward higher-quality, production-ready behavior in real-world deployment scenarios.}
+        \resumeItem{Worked across \textbf{data annotation, model evaluation, and research documentation} within an agile team, adapting to detailed technical guidelines and cross-functional collaboration.}
+        \resumeItem{Applied responsible AI best practices with hands-on experience in ML pipelines, performance benchmarking, and iterative model improvement across distributed team workflows.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{QRYPT -- Secure Visual Token System} $|$ \emph{Python, FastAPI, React} \quad {\scriptsize \textit{(Vibe Coded)}}}{Ongoing}
+      \resumeItemListStart
+        \resumeItem{Architected a \textbf{full-stack token verification platform} end-to-end, spanning cryptographic QR token signing, real-time fraud detection, and a React PWA scanner -- owning backend, frontend, and infrastructure simultaneously.}
+        \resumeItem{Designed a \textbf{KMS-backed Ed25519 cryptographic engine} with CBOR wire format for tamper-proof token generation and offline-capable verification, with private key material zeroed from memory post-signing.}
+        \resumeItem{Built a \textbf{streaming anomaly detection pipeline} using Redis Streams and an Isolation Forest ML model, implementing rule-based fraud detection with consumer group fault tolerance and dead-letter handling.}
+        \resumeItem{Implemented \textbf{real-time revocation propagation} via Server-Sent Events with cursor-based replay on reconnect, ensuring zero missed revocations across scanner clients even after disconnection.}
+        \resumeItem{Delivered \textbf{RESTful APIs} with JWT authentication, RBAC, rate limiting, and idempotency, alongside a Kubernetes-ready deployment with CI/CD via GitHub Actions.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{DSA \& Competitive Programming}}{Ongoing}
+      \resumeItemListStart
+        \resumeItem{Achieved \textbf{LeetCode rating of 1825} with 500+ problems solved across arrays, graphs, dynamic programming, and system design -- demonstrating analytical depth aligned with generalist engineering roles.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages:} C/C++, Python, Java (basics) \\
+     \textbf{Web \& Frameworks:} JavaScript, HTML/CSS \\
+     \textbf{AI/ML \& Data:} Machine Learning, Generative AI, Prompt Engineering \\
+     \textbf{Tools \& Practices:} Git, GitHub, VS Code \\
+     \textbf{Concepts:} Data Structures \& Algorithms, Object-Oriented Programming \\
+     \textbf{Soft Skills:} Analytical Thinking, Cross-functional Collaboration, Technical Communication, Fast Learner
+    }}
+ \end{itemize}
+
+%-----------LANGUAGES-----------
+\section{Languages}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Kannada:} Native $|$
+     \textbf{English:} B2 Upper Intermediate (actively improving toward C1) $|$
+     \textbf{Hindi:} Conversational
+    }}
+ \end{itemize}
+
+%-----------ADDITIONAL HIGHLIGHTS-----------
+\section{Additional Highlights}
+  \resumeSubHeadingListStart
+    \resumeSubItem{\textbf{Collaborative Team Player:} Proven experience in structured, multi-disciplinary teams at Samsung R\&D, managing concurrent work across research, engineering, and documentation.}
+    
+  \resumeSubHeadingListEnd
+
+\end{document}

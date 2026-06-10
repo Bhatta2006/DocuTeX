@@ -1,0 +1,135 @@
+/* Minimalist Brutalist Design */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.compiler-box {
+    border: 1px solid #ffffff;
+    padding: 2.5rem;
+    max-width: 450px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: #000000;
+}
+
+.title {
+    font-size: 1.35rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 1px dashed #ffffff;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    transition: background-color 0.15s ease;
+}
+
+.upload-area:hover, .upload-area.dragover {
+    background-color: #ffffff;
+    color: #000000;
+    border-style: solid;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.btn:disabled {
+    border-color: #444444;
+    color: #444444;
+    cursor: not-allowed;
+}
+
+.btn-download {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.btn-download:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Status Messages */
+.status-msg {
+    font-size: 0.85rem;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #ffffff;
+    padding: 0.65rem;
+    word-break: break-all;
+}
+
+/* Log / Terminal Output */
+.log-container {
+    border: 1px solid #ffffff;
+    background-color: #000000;
+}
+
+.terminal {
+    padding: 1rem;
+    height: 180px;
+    overflow-y: auto;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.log-line {
+    word-break: break-all;
+    white-space: pre-wrap;
+    color: #ffffff;
+}
+
+.log-line.system-msg {
+    color: #888888;
+}
+
+.log-line.stderr {
+    color: #ffffff;
+    text-decoration: underline;
+}

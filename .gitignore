@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+bin/
+lib/
+include/
+pip-selfcheck.json
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local/Temp Files
+temp_conversions/
+*.docx
+!examples/*.docx
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

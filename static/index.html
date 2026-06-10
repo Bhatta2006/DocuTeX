@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX to DOCX Compiler</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="compiler-box">
+        <h1 class="title">LaTeX to DOCX Compiler</h1>
+        
+        <div class="upload-area" id="drop-zone">
+            <input type="file" id="file-input" accept=".tex" hidden>
+            <span id="upload-prompt">Select .tex file</span>
+        </div>
+
+        <button class="btn" id="compile-btn" disabled>Compile</button>
+        
+        <div id="status-container" class="status-msg" hidden></div>
+        
+        <div class="log-container" id="log-section" hidden>
+            <div class="terminal" id="terminal-logs"></div>
+        </div>
+        
+        <a href="#" class="btn btn-download" id="download-btn" hidden>Download .docx</a>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
