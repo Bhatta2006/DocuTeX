@@ -2,6 +2,7 @@ import os
 import sys
 import uuid
 import shutil
+import tempfile
 import subprocess
 from pathlib import Path
 from typing import List, Dict, Any
@@ -18,7 +19,7 @@ app = FastAPI(
 # Define directories
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
-TEMP_DIR = BASE_DIR / "temp_conversions"
+TEMP_DIR = Path(tempfile.gettempdir()) / "temp_conversions"
 
 # Ensure directories exist
 STATIC_DIR.mkdir(exist_ok=True)

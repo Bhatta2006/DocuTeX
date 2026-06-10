@@ -90,6 +90,19 @@ pytest
 
 ---
 
+## Deploying to Vercel (Free Lifetime Hosting)
+
+DocuTeX is pre-configured to be deployed on Vercel as a Serverless Python application:
+
+1. Log in to [Vercel](https://vercel.com/) (or sign up for a free Hobby account).
+2. Click **Add New** > **Project**.
+3. Import your `DocuTeX` GitHub repository.
+4. Click **Deploy**. Vercel will automatically read `vercel.json`, install the dependencies from `requirements.txt`, and deploy the frontend and backend under your free `.vercel.app` subdomain.
+
+Every commit pushed to the `main` branch will automatically trigger a production build and redeployment.
+
+---
+
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
